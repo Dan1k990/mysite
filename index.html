@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookReader — Онлайн Библиотека</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #111;
+            transition: background-color 0.3s, color 0.3s;
+            padding-top: 60px;
+        }
+        body.dark {
+            background-color: #111;
+            color: #BFBFBF;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            z-index: 1000;
+        }
+        body.dark header {
+            background-color: #222;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007BFF;
+        }
+        .search-box input {
+            padding: 8px 12px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+        }
+        body.dark .search-box input {
+            background-color: #444;
+            color: #BFBFBF;
+            border-color: #666;
+        }
+        .catalog-btn, .theme-btn, .login-btn {
+            padding: 8px 12px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .catalog-btn {
+            background-color: #f0f0f0;
+            margin-left: 500px;
+        }
+        .theme-btn{
+            background-color: #007BFF;
+            color: #fff;
+            margin-right: 500px;
+        }
+        .theme-btn, .login-btn {
+            background-color: #007BFF;
+            color: #fff;
+        }
+        .theme-btn:hover, .login-btn:hover {
+            background-color: #0056b3;
+        }
+        body.dark .catalog-btn {
+            background-color: #333;
+            color: #BFBFBF;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .intro {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #ddd;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            max-width: 1200px;
+            height: 500px;
+        }
+        body.dark .intro {
+            background-color: #222;
+        }
+        .intro-text {
+            max-width: 50%;
+            font-size: 18px;
+        }
+        .intro-placeholder {
+            width: 45%;
+            height: 400px;
+            background-color: #ccc;
+        }
+        .intro-placeholder img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        body.dark .intro-placeholder {
+            background-color: #444;
+        }
+        .book-section {
+            background-color: #ddd;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        body.dark .book-section {
+            background-color: #222;
+        }
+        .book-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        .book-card {
+            background-color: #fff;
+            text-align: center;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        body.dark .book-card {
+            background-color: #333;
+        }
+        .book-card img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+        .book-info {
+            padding: 5px;
+            font-size: 14px;
+        }
+        .country {
+            font-size: 12px;
+            color: #666;
+        }
+        body.dark .country {
+            color: #BFBFBF;
+        }
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 15px;
+        }
+        body.dark footer {
+            background-color: #222;
+        }
+        .footer-links a {
+            margin-left: 15px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .footer-links {
+            display: flex;
+            gap: 15px;
+        }
+        h1 {
+            margin-top: 7px;
+            margin-bottom: 7px;
+        }
+        h2 {
+            margin-bottom: 7px;
+        }
+        p {
+            margin-top: 7px;
+            margin-bottom: 7px;
+        }
+        a {
+            color: inherit; /* Цвет будет такой же, как у родительского элемента */
+            text-decoration: none; /* Убирает подчеркивание */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><a href="index.html">BookReader</a></div>
+    <button class="catalog-btn"><a href="bookreader_catalog.html">Каталог</a></button>
+    <div class="search-box">
+        <input type="text" placeholder="Поиск книг...">
+    </div>
+    <button class="theme-btn" onclick="toggleTheme()">Тема</button>
+    <button class="login-btn"><a href="bookreader_auth.html">Вход / Регистрация</a></button>
+</header>
+
+<div class="container">
+
+    <div class="intro">
+        <div class="intro-text">
+            <h1>BookReader — твоя онлайн-библиотека</h1>
+            <p>Читай лучшие книги со всего мира в удобном формате онлайн бесплатно. У нас есть классика, современные бестселлеры и уникальные произведения со всех уголков планеты.</p>
+        </div>
+        <div class="intro-placeholder"><img src="images/sourse1.png"></div>
+    </div>
+
+    <div class="book-section">
+        <h2>Популярные книги</h2>
+        <div class="book-list">
+            <div class="book-card"><a href="books/bookreader_book1_page.html"><img src="images/cover1.png"><div class="book-info">Мастер и Маргарита<div class="country">Магия, мистика и любовь в сердце Москвы</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover2.png"><div class="book-info">Гордость и предубеждение<div class="country">Классика романтической литературы о поиске счастья</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover3.png"><div class="book-info">1984<div class="country">Антиутопия о тоталитарном обществе и борьбе за свободу</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover4.png"><div class="book-info">Унесённые ветром<div class="country">Эпическая история любви на фоне Гражданской войны в США</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover5.png"><div class="book-info">Алхимик<div class="country">Философская притча о мечте и судьбе</div></div></a></div>
+        </div>
+    </div>
+
+    <div class="book-section">
+        <h2>Новинки</h2>
+        <p>Свежие поступления — будь в курсе новинок!</p>
+        <div class="book-list">
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover6.jpg"><div class="book-info">Книга 1<div class="country">Россия</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover7.jpg"><div class="book-info">Книга 2<div class="country">Франция</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover8.jpg"><div class="book-info">Книга 3<div class="country">Япония</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover9.jpg"><div class="book-info">Книга 4<div class="country">Китай</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover10.jpg"><div class="book-info">Книга 5<div class="country">США</div></div></a></div>
+        </div>
+    </div>
+
+    <div class="book-section">
+        <h2>Топ романов</h2>
+        <p>Самые читаемые и любимые романы.</p>
+        <div class="book-list">
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover11.jpg"><div class="book-info">Книга 1<div class="country">Россия</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover12.jpg"><div class="book-info">Книга 2<div class="country">Франция</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover13.jpg"><div class="book-info">Книга 3<div class="country">Япония</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover14.jpg"><div class="book-info">Книга 4<div class="country">Китай</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover15.jpg"><div class="book-info">Книга 5<div class="country">США</div></div></a></div>
+        </div>
+    </div>
+
+    <div class="book-section">
+        <h2>Топ детских сказок</h2>
+        <p>Лучшие сказки для самых маленьких читателей.</p>
+        <div class="book-list">
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover16.jpg"><div class="book-info">Книга 1<div class="country">Россия</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover17.jpg"><div class="book-info">Книга 2<div class="country">Франция</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover18.jpg"><div class="book-info">Книга 3<div class="country">Япония</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover19.jpg"><div class="book-info">Книга 4<div class="country">Китай</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover20.jpg"><div class="book-info">Книга 5<div class="country">США</div></div></a></div>
+        </div>
+    </div>
+
+    <div class="book-section">
+        <h2>Топ восточной литературы</h2>
+        <p>Классические и современные книги восточных авторов.</p>
+        <div class="book-list">
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover21.jpg"><div class="book-info">Книга 1<div class="country">Россия</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover22.jpg"><div class="book-info">Книга 2<div class="country">Франция</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover23.jpg"><div class="book-info">Книга 3<div class="country">Япония</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover24.jpg"><div class="book-info">Книга 4<div class="country">Китай</div></div></a></div>
+            <div class="book-card"><a href="bookreader_404.html"><img src="images/cover25.jpg"><div class="book-info">Книга 5<div class="country">США</div></div></a></div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="logo">BookReader</div>
+    <div class="footer-links">
+        <a href="bookreader_404.html">Обратная связь</a>
+        <a href="bookreader_404.html">О нас</a>
+        <a href="bookreader_404.html">Политика конфиденциальности</a>
+        <a href="bookreader_404.html">Пользовательское соглашение</a>
+    </div>
+</footer>
+
+<script>
+    function toggleTheme() {
+        document.body.classList.toggle('dark');
+    }
+</script>
+
+</body>
+</html>
