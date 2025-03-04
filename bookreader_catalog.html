@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог книг - BookReader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #111;
+            padding-top: 60px;
+        }
+        body.dark {
+            background-color: #111;
+            color: #BFBFBF;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        body.dark header {
+            background-color: #222;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007BFF;
+        }
+        .theme-btn {
+            padding: 8px 12px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .theme-btn:hover {
+            background-color: #0056b3;
+        }
+        body.dark .theme-btn {
+            background-color: #444;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        body.dark table {
+            background-color: #222;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        body.dark th, body.dark td {
+            border-color: #444;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        body.dark th {
+            background-color: #333;
+        }
+        th:hover {
+            background-color: #e0e0e0;
+        }
+        body.dark th:hover {
+            background-color: #444;
+        }
+        a {
+            color: inherit; /* Цвет будет такой же, как у родительского элемента */
+            text-decoration: none; /* Убирает подчеркивание */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><a href="index.html">BookReader</a></div>
+    <button class="theme-btn" onclick="toggleTheme()">Тема</button>
+</header>
+
+<div class="container">
+    <h1>Каталог книг</h1>
+    <table id="bookTable">
+        <thead>
+            <tr>
+                <th onclick="sortTable(0)">Название</th>
+                <th onclick="sortTable(1)">Автор</th>
+                <th onclick="sortTable(2)">Год издания</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Война и мир</td><td>Лев Толстой</td><td>1869</td></tr>
+            <tr><td>1984</td><td>Джордж Оруэлл</td><td>1949</td></tr>
+            <tr><td>Мастер и Маргарита</td><td>Михаил Булгаков</td><td>1966</td></tr>
+            <tr><td>Преступление и наказание</td><td>Фёдор Достоевский</td><td>1866</td></tr>
+            <tr><td>Гарри Поттер и философский камень</td><td>Дж. К. Роулинг</td><td>1997</td></tr>
+            <tr><td>Сто лет одиночества</td><td>Габриэль Гарсия Маркес</td><td>1967</td></tr>
+            <tr><td>Алиса в стране чудес</td><td>Льюис Кэрролл</td><td>1865</td></tr>
+            <tr><td>Пикник на обочине</td><td>Аркадий и Борис Стругацкие</td><td>1972</td></tr>
+            <tr><td>Гордость и предубеждение</td><td>Джейн Остин</td><td>1813</td></tr>
+            <tr><td>Унесённые ветром</td><td>Маргарет Митчелл</td><td>1936</td></tr>
+            <tr><td>Колыбель для кошки</td><td>Курт Воннегут</td><td>1963</td></tr>
+            <tr><td>Три товарища</td><td>Эрих Мария Ремарк</td><td>1936</td></tr>
+            <tr><td>Человек в поисках смысла</td><td>Виктор Франкл</td><td>1946</td></tr>
+            <tr><td>Портрет Дориана Грея</td><td>Оскар Уайльд</td><td>1890</td></tr>
+            <tr><td>Финансист</td><td>Теодор Драйзер</td><td>1912</td></tr>
+            <tr><td>О дивный новый мир</td><td>Олдос Хаксли</td><td>1932</td></tr>
+            <tr><td>Дюна</td><td>Фрэнк Герберт</td><td>1965</td></tr>
+            <tr><td>451 градус по Фаренгейту</td><td>Рэй Брэдбери</td><td>1953</td></tr>
+            <tr><td>Шантарам</td><td>Грегори Дэвид Робертс</td><td>2003</td></tr>
+            <tr><td>Братья Карамазовы</td><td>Фёдор Достоевский</td><td>1880</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function toggleTheme() {
+        document.body.classList.toggle('dark');
+    }
+
+    function sortTable(n) {
+        const table = document.getElementById("bookTable");
+        let rows = Array.from(table.rows).slice(1);
+        let isAscending = table.rows[0].cells[n].getAttribute('data-sort') === 'asc';
+        
+        rows.sort((rowA, rowB) => {
+            let cellA = rowA.cells[n].innerText.toLowerCase();
+            let cellB = rowB.cells[n].innerText.toLowerCase();
+            if (!isNaN(cellA) && !isNaN(cellB)) {
+                return isAscending ? cellA - cellB : cellB - cellA;
+            }
+            return isAscending ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+        });
+
+        table.rows[0].cells[n].setAttribute('data-sort', isAscending ? 'desc' : 'asc');
+
+        rows.forEach(row => table.tBodies[0].appendChild(row));
+    }
+</script>
+
+</body>
+</html>
